@@ -126,7 +126,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-# Media iles
+# Media files
 
 MEDIA_URL = '/media/'
 
