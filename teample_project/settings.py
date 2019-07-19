@@ -126,7 +126,9 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-# Media iles
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Media files
 
 MEDIA_URL = '/media/'
 
