@@ -6,3 +6,4 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     phone_number = models.CharField(max_length=11, blank=True)
     time_table = models.CharField(default=('0' * 81), max_length=81)
+    
