@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+{#        <p>아이디</p>#}
+{#        {{ form.username }}#}
+{#        <p>비밀번호</p>#}
+{#        {{ form.password }}#}
+{#        <p>비밀번호 재입력</p>#}
+{#        {{ form.check_password }}#}
+{#        <p>이메일</p>#}
+{#        {{ form.email }}#}
+{#        <p>휴대전화번호</p>#}
+{#        {{ form.phone_number }}#}
+{#        <p>성</p>#}
+{#        {{ form.last_name }}#}
+{#        <p>이름</p>#}
+{#        {{ form.first_name }}#}
+        {{ form.as_p }}
+        <p><input type="submit" value="회원가입"></p>
+    </form>
+{% endblock %}
