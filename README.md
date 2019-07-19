@@ -34,3 +34,23 @@ pip3 install -r requirements.txt
 
 - [ ] 파일, 이미지 여러개 추가하는 방식 구현
 - [ ] 팀 글, 댓글 구현
+
+## 팁
+
+* 마이그레이션 오류
+
+```bash
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc"  -delete
+python manage.py makemigrations
+python manage.py migrate
+```
+
+마이그레이션 파일들(__init__.py 제외)을 삭제하고 다시 마이그레이션한다.
+
+* manage.py 관련 오류
+
+```bash
+pip3 uninstall django
+pip3 install django==2.2.3
+```
