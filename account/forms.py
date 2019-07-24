@@ -41,7 +41,9 @@ class SignUpForm(forms.ModelForm):
         return user
 
 
-class SignInForm(forms.ModelForm):
+class SignInForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+
     class Meta:
-        model = User
         fields = ['username', 'password']
