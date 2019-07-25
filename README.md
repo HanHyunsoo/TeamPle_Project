@@ -10,15 +10,17 @@ pip3 install -r requirements.txt
 
 윈도우는 pip3를 pip로 바꿔서 필요한 패키지들을 설치해주세요.
 
+## 모델 설계
+
+![DB](db.png)
+
 ## 개발 체크리스트
 
 ### 현수
 
-- [ ] 로그인, 회원가입 구현(AbstractBaseUser), 프론트엔드 구성
-- [ ] 시간표는 2진데이터로 구현 시간표 끼리 비교는 views.py에서 구현
-- [ ] 시간표 표시는 자바스크립트로 표형식으로 규현
-- [ ] 랜덤함수로 아스키코드 구현(0~9, A~Z 총 6자리)
-- [ ] 초대코드로 팀에 들어가는 방식 구현
+- [x] 회원가입, 로그인, 로그아웃 구현
+- [ ] 시간표는 2진데이터로, 시간표 끼리 비교는 views.py에서, 프론트는 2진데이터를 읽어 표형식으로 구현
+- [ ] 초대코드로 팀에 들어가는 방식 구현(랜덤으로 아스키코드를 뽑아내서 구현한다.)
 
 ### 수현
 
@@ -37,7 +39,7 @@ pip3 install -r requirements.txt
 
 ## 팁
 
-* 마이그레이션 오류
+- 마이그레이션 오류
 
 ```bash
 find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
@@ -48,7 +50,7 @@ python manage.py migrate
 
 마이그레이션 파일들(__init__.py 제외)을 삭제하고 다시 마이그레이션한다.
 
-* manage.py 관련 오류
+- manage.py 관련 오류
 
 ```bash
 pip3 uninstall django
