@@ -44,3 +44,9 @@ def sign_in(request):
         form = SignInForm()
 
     return render(request, 'account/sign_in.html', {'form': form})
+
+
+# 로그아웃
+def sign_out(request):
+    auth.logout(request)
+    return redirect('account:sign_in')
