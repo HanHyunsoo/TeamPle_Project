@@ -8,10 +8,10 @@
 <table border="1px solid black">
     <script type="text/javascript">
         function change_color(tag) {
-            if (tag.style.backgroundColor == 'red') {
-                tag.style.backgroundColor = ''
+            if (tag.style.backgroundColor == "red") {
+                tag.style.removeProperty("background-color")
             } else {
-                tag.style.backgroundColor = 'red'
+                tag.style.backgroundColor = "red"
             }
         }
 
