@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import auth
 from .forms import SignUpForm, SignInForm
 from .models import User
-
+from team.models import Team, TeamMember
 
 # Create your views here.
 
@@ -36,17 +36,21 @@ def sign_in(request):
             # user가 존재하면 로그인을 하고 메인화면으로 넘어감(메인이 구현안되있어 로그인으로 넘어가게 수정함)
             if user:
                 auth.login(request, user)
-                return redirect('account:sign_in')
+                return redirect('account:user_home', user.id)
             # 만약 존재하지 않으면 form에 에러메세지를 추가하고 46번째 줄로넘어가 템플릿을 렌더링함
             form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다.')
     # 방식이 get일때 빈폼을 생성하고 46번째 줄로넘어가 로그인 템플릿을 폼을 포함하여 렌더링한다
     else:
         form = SignInForm()
-
     return render(request, 'account/sign_in.html', {'form': form})
 
+def user_home(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    user_team = TeamMember.objects.filter(user=user)   
+    return render(request, 'account/user_home.html', {'user':user, 'user_team':user_team})
 
 # 로그아웃
 def sign_out(request):
     auth.logout(request)
     return redirect('account:sign_in')
+

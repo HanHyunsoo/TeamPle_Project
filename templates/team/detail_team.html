@@ -1,0 +1,16 @@
+{{user.username}}의 사용자!
+<br>
+팀 번호={{ details.id }}
+<br>
+팀 리더={{ details.team_leader}}
+<br>
+팀 이름={{ details.team_name }}
+<br>
+팀 소개={{ details.introduce }}
+<br>
+팀 유저 = 
+{% for members in details.members.all %}
+{{ members.username }}
+{% endfor %}
+<br><br>
+<a href="{% url 'team:add_member' details.id%}">팀추가하기!</a>
