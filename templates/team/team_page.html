@@ -1,0 +1,10 @@
+{% for team in teams.all %}
+팀 번호={{ team.id }}
+<br>
+팀 리더={{ team.team_leader}}
+<br>
+<a href="{% url 'team:detail_team' team.id %}">팀 이름={{ team.team_name }}</a>
+<br><br>
+{% endfor %}
+
+<!-- <h1>{{ team.member }}</h1> -->

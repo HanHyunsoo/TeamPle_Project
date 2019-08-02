@@ -1,0 +1,114 @@
+{% load staticfiles %} 
+<!-- 첫번째페이지(로그인)를 띄웁니다. -->
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link href="{% static 'https://fonts.googleapis.com/css?family=Righteous&display=swap' %}" rel="stylesheet">
+	<title>u임승차</title>
+</head>
+
+<body>
+	<nav>
+		<div class="nav_container">
+			<div class="nav_logo">
+				<img src="{% static 'img/캡처4.png' %}">
+			</div>
+			<div class="nav_center">
+				Happy group work
+			</div>
+			<form class="nav_login">
+				<table>
+					<tbody>
+						<tr>
+							<td class="login_tool">
+								<label for="email">
+									이메일 또는 휴대폰
+								</label>
+							</td>
+							<td class="login_tool">
+								<label for="pass">
+									비밀번호
+								</label>
+							</td>
+						</tr>	
+						<tr>
+							<td>
+								<input type="email" name="email" class="inputtext" id="email" data-testid="royal_email">
+							</td>
+							<td>
+								<input type="password" name="pass" class="inputtext" id="pass" data-testid="royal_pass">
+							</td>
+							<td>
+                                <button type="submit" class="submit_button">로그인</button>
+							</td> 
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</nav>
+	<header>
+		<div class="background_img">
+			<img src="{% static 'img/teme.jpg' %}">
+		</div>
+		<div class="background_form">
+			<hr>회원가입</hr>
+			<hr></hr>
+			<table>
+				<tbody>
+					<tr>
+						<td class="signin_tool1">
+							<label for="email">
+								이메일 또는 휴대폰
+							</label>
+						</td>
+					</tr>
+					<tr>	
+						<td class="signin_tool1">
+							<input type="email" name="email" class="inputtext" id="email" data-testid="royal_email">
+						</td>
+					</tr>
+					<tr>	
+						<td class="signin_tool2">
+							<label for="pass">
+								비밀번호
+							</label>
+						</td>
+					</tr>
+					<tr>
+					<td class="signin_tool2">
+							<input type="password" name="pass" class="inputtext" id="pass" data-testid="royal_pass">
+						</td>
+					</tr>
+					<tr>		
+						<td class="signin_tool3">
+							<label for="name">
+								닉네임
+							</label>
+						</td>
+					</tr>	
+					<tr>
+						<td class="signin_tool3">
+							<input type="nickname" name="name" class="inputtext" id="name" data-testid="royal_name">
+						</td>
+					</tr>
+					<tr>	
+						<td>
+							<label class="signinbutton">
+                                <button type="submit" class="submit_button">회원가입</button>
+							</label>
+						</td> 
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		
+	</header>
+	<footer>
+		<p>copyright &copy; Likelion, 2017</p>
+	</footer>
+
+</body>
+</html>

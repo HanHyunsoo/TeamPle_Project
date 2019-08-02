@@ -9,9 +9,9 @@
     <script type="text/javascript">
         function change_color(tag) {
             if (tag.style.backgroundColor == "red") {
-                tag.style.removeProperty("background-color")
+                tag.style.removeProperty("background-color");
             } else {
-                tag.style.backgroundColor = "red"
+                tag.style.backgroundColor = "red";
             }
         }
 
@@ -22,7 +22,46 @@
             document.write('</td>');
             document.write('</tr>');
         }
+
+        function get_binary() {
+            var tags = document.getElementsByTagName("td");
+            var result = "";
+
+            for (var i = 0; i < tags.length; i++) {
+                if (tags[i].style.backgroundColor == "red") {
+                    result += 1;
+                } else {
+                    result += 0;
+                }
+            }
+
+            return result;
+        }
     </script>
 </table>
+<br>
+
+binary: <input type="text" name="binary" id="binary">
+<button onclick="draw_table()">draw</button>
+
+<script type="text/javascript">
+    function draw_table() {
+        var binary = String(document.getElementById("binary").value);
+
+        document.write("<table border=\"1px solid black\">");
+        for (var i = 0; i < binary.length; i++) {
+            document.write('<tr>');
+            if (binary[i] == '1') {
+                document.write("<td style=\"background-color: red;\">");
+            } else {
+                document.write("<td>");
+            }
+            document.write((i));
+            document.write('</td>');
+            document.write('</tr>');
+        }
+        document.write("</table>");
+    }
+</script>
 </body>
 </html>

@@ -10,6 +10,8 @@
         <p>{{ user.username }}님 안녕하세요!</p>
         <a href="{% url 'mail:mypage' user.pk %}">mypage가기</a>
         <p><a href="{% url 'account:sign_out' %}">Sign out</a></p>
+        <h1>hi</h1>
+
     {% else %}
         <p><a href="{% url 'account:sign_in' %}">Sign in</a></p>
         <p><a href="{% url 'account:sign_up' %}">Sign up</a></p>
@@ -17,6 +19,5 @@
     <hr>
     {% block content %}
     {% endblock %}
-
 </body>
 </html>

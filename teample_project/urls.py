@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+import main.views#메인앱의 views함수를 임포트 해줍니다.
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('mail/', include('mail.urls')),
+    path('', include('main.urls')),#메인페이지 띄움
+    path('team/', include('team.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
