@@ -14,6 +14,8 @@ pip3 install -r requirements.txt
 
 ![DB](db.png)
 
+![ERD](erd.png)
+
 ## 개발 체크리스트
 
 ### 현수

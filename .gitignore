@@ -141,5 +141,3 @@ dmypy.json
 .media/*
 .staticfiles/
 .staticfiles/*
-*/migrations/*.py
-!*/migrations/__init__.py
