@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('mail/', include('mail.urls')),
-    path('', include('main.urls')),#메인페이지 띄움
+    # path('', include('main.urls')), # 메인페이지 띄움
     path('team/', include('team.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
