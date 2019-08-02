@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### VisualStudioCode template
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -135,5 +136,6 @@ dmypy.json
 
 .idea/
 
-### vscode
-.vscode/
+### django
+.media/
+.media/*
