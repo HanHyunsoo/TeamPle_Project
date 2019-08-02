@@ -5,10 +5,12 @@ U임승차(팀플에서 필요한 관리를 한번에!)
 ## 프로젝트 기본 설정
 
 ```bash
+python3 -m venv venv
+source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-윈도우는 pip3를 pip로 바꿔서 필요한 패키지들을 설치해주세요.
+가상환경 생성후 활성화하고 requirements.txt에 있는 필요한 패키지들 설치
 
 ## 모델 설계
 
