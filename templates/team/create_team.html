@@ -5,15 +5,17 @@
     세번째 그룹 초대하기
 </p>
 <form action="" method="POST">
-
+    
     {% csrf_token %}
     <table>       
-    {{ form.as_p }}
+        {{ form.as_table }}
     </table>
     <button type="submit"> 팀 생성! </button>
     </button>
 </form>
+
 <!-- 
 <form action="" method="POST">
     
-</form> -->
+</form> 
+-->

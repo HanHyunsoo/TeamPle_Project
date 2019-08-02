@@ -9,6 +9,8 @@
     {% if user.is_active %}
         <p>{{ user.username }}님 안녕하세요!</p>
         <p><a href="{% url 'account:sign_out' %}">Sign out</a></p>
+        <h1>hi</h1>
+
     {% else %}
         <p><a href="{% url 'account:sign_in' %}">Sign in</a></p>
         <p><a href="{% url 'account:sign_up' %}">Sign up</a></p>
@@ -16,5 +18,9 @@
     <hr>
     {% block content %}
     {% endblock %}
+
+    {% block teamlist %}
+    {% endblock %}
+
 </body>
 </html>
