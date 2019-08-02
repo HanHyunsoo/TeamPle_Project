@@ -13,4 +13,3 @@ def phone_number_validator(value):
 class User(AbstractUser):
     phone_number = models.CharField(max_length=13, blank=True, validators=[phone_number_validator])
     time_table = models.CharField(default=('0' * 91), max_length=91)
-    
