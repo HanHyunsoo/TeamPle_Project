@@ -28,6 +28,11 @@ def mypage(request, user_id):
     mails = get_object_or_404(User, pk=user_id)
     return render(request, 'mail/mypage.html', {'mails': mails})
 
+def delete_mail(request, mail_id):
+    mail = get_object_or_404(Mail, pk=mail_id)
+    mail.delete()
+    return redirect('mail:mypage')
+
 # def send_mail(request):
 #     if request.method == "POST":
 
