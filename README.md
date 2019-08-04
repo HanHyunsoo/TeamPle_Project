@@ -10,7 +10,7 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-가상환경 생성후 활성화하고 requirements.txt에 있는 필요한 패키지들 설치
+가상환경 생성후 활성화하고 requirements.txt에 있는 필요한 패키지들 설치(리눅스 기준)
 
 ## 모델 설계
 
