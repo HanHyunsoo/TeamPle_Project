@@ -14,11 +14,11 @@ pip3 install -r requirements.txt
 
 ## 설계
 
-![DB](db.png)
+![DB](media/readme/db.png)
 
-![ERD](erd.png)
+![ERD](media/readme/erd.jpg)
 
-![FlowChart](flowchart.jpg)
+![FlowChart](media/readme/flowchart.jpg)
 
 ## 개발 체크리스트
 
