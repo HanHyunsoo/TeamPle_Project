@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import auth
-from .forms import SignUpForm, SignInForm
+from .forms import SignUpForm, SignInForm, UserChangeForm
 from .models import User
 from team.models import Team, TeamMember
 
@@ -19,8 +19,7 @@ def sign_up(request):
     # request가 get이면 빈폼을 생성하고 22번째로 넘어가 템플릿 렌더링
     else:
         form = SignUpForm()
-
-    return render(request, 'account/sign_up.html', {'form': form})
+        return render(request, 'account/sign_up.html', {'form': form})
 
 
 # 로그인
@@ -42,7 +41,7 @@ def sign_in(request):
     # 방식이 get일때 빈폼을 생성하고 46번째 줄로넘어가 로그인 템플릿을 폼을 포함하여 렌더링한다
     else:
         form = SignInForm()
-    return render(request, 'account/sign_in.html', {'form': form})
+        return render(request, 'account/sign_in.html', {'form': form})
 
 def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
@@ -54,3 +53,14 @@ def sign_out(request):
     auth.logout(request)
     return redirect('account:sign_in')
 
+# 개인정보수정
+def edit(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == "POST":
+        form = UserChangeForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            return redirect("account:user_home", user_id)
+    else:
+        form = UserChangeForm(instance=request.user)
+        return render(request, "account/edit.html", {'form':form})

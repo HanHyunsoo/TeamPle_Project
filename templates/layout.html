@@ -8,7 +8,6 @@
     <h1>부모 템플릿</h1>
     {% if user.is_active %}
         <p>{{ user.username }}님 안녕하세요!</p>
-        <a href="{% url 'mail:mypage' user.pk %}">mypage가기</a>
         <p><a href="{% url 'account:sign_out' %}">Sign out</a></p>
         <h1>hi</h1>
 
