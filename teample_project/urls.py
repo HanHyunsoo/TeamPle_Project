@@ -24,4 +24,5 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('', main.views.home, name='home'),#메인페이지 띄움
     path('team/', include('team.urls')),
+    path('team_article/', include('team_article.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
