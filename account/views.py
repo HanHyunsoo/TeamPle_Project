@@ -43,8 +43,8 @@ def sign_in(request):
         form = SignInForm()
         return render(request, 'account/sign_in.html', {'form': form})
 
-def user_home(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+def user_home(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
     user_team = TeamMember.objects.filter(user=user)   
     return render(request, 'account/user_home.html', {'user':user, 'user_team':user_team})
 
@@ -53,7 +53,13 @@ def sign_out(request):
     auth.logout(request)
     return redirect('account:sign_in')
 
+#팀 유저의 개인정보를 보여주는 창
+def user_info(request, user_pk): 
+   user = get_object_or_404(User, pk=user_pk)
+   return render(request, 'account/user_info.html', {'user':user})
+
 # 개인정보수정
+"""
 def edit(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.method == "POST":
@@ -64,3 +70,4 @@ def edit(request, user_id):
     else:
         form = UserChangeForm(instance=request.user)
         return render(request, "account/edit.html", {'form':form})
+"""

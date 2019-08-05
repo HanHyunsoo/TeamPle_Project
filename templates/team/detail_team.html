@@ -1,16 +1,46 @@
-{{user.username}}의 사용자!
+<a href=" {% url 'account:user_home' user.pk %}">{{user.username}}의 사용자!</a> 
+<a href=" {% url 'team:leave_team' details.pk user.pk %}">팀 나가기!</a>
 <br>
-팀 번호={{ details.id }}
+팀 번호={{ details.pk }}
 <br>
-팀 리더={{ details.team_leader}}
+{% for i in details.team_leader.all %}
+팀 리더={{ i.username }}
+{{ details.team_leader.all }} 
 <br>
+팀 리더 번호= {{i.pk}}
+{% endfor %}
+<br>
+<h1>
 팀 이름={{ details.team_name }}
+</h1>
 <br>
 팀 소개={{ details.introduce }}
 <br>
-팀 유저 = 
-{% for members in details.members.all %}
-{{ members.username }}
+팀 유저
+<br>
+{% for i in team_member.all %}
+    <p>
+        {% for k in details.team_leader.all %}
+        <a href="{% url 'account:user_imfo'  i.user.id %}">{{ i.user.username }}</a>
+
+            {% if user.username == k.username %}
+                {% if i.user.id != k.id %}
+                <a href="{% url 'team:expulsion_member' i.team.id i.user.id %}">추방</a>
+                {% endif %}
+            {% endif %}
+
+            {% if i.user.id == k.id %}
+                리더입니다~!
+            {% endif %}
+
+        {% endfor %}
+    </p>
 {% endfor %}
+
+<h2>팀원 별 작업공간!</h2>
+{% for i in team_member.all %}
+    <a href="{% url 'team_article:workspace' i.team.pk i.user.pk %}">{{ i.user.username }}</a>
+{% endfor %}
+<br>
 <br><br>
-<a href="{% url 'team:add_member' details.id%}">팀추가하기!</a>
+<a href="{% url 'team:add_member' details.pk user.pk %}">팀추가하기!</a>
