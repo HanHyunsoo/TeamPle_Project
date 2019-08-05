@@ -4,6 +4,7 @@
             <tr>
                 <th scope="col" style="width: 10%;">글 번호</th>
                 <th scope="col" style="width: 20%;">날짜</th>
+                <th scope="col" style="width: 20%;">보낸사람</th>
                 <th scope="col" style="width: 50%;">내용</th>
                 <th scope="col" style="width: 10%;">삭제</th>
             </tr>
@@ -13,8 +14,9 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ mail.created_date }}</td>
-                    <td>{{ mail.content | truncatechars:10 }}</a></td>
-                    <td><a href="{% url 'mail:delete_mail' mail.id %}">삭제</a></td>
+                    <td>{{ mail.from_user.username }}</td>
+                    <td>{{ mail.content | truncatechars:10 }}<br><a href="#">자세히...</a></td>
+                    <td><a href="{% url 'mail:delete_mail' mail.pk %}">삭제</a></td>
                 </tr>
             {% endfor %}
             </tbody>
