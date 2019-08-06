@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.utils import timezone
 from .models import Team, TeamMember
 from account.models import User
-from .forms import TeamForm, AddForm
+from .forms import TeamForm, AddForm, EditForm
 
 # Create your views here.
 
@@ -59,7 +59,23 @@ def add_member(request, team_id, tm=None):
 
    else:
       form = AddForm()
-      return render(request, 'team/add_member.html', {'form':form})      
+      return render(request, 'team/add_member.html', {'form':form})
+
+
+def correct_team(request, team_id):
+   team_correct = get_object_or_404(Team, pk = team_id)
+   if request.method == "POST":
+      form = EditForm(data = request.POST, instance=request.team_correct)
+      if form.is_valid():
+         team_correct = form.save()
+         return redirect('team/correct_team', team_id)
+   else:
+      form = EditForm(instance = request.team_correct)
+      return redirect('team/correct_team', team_id)
+    
+      
+   
+
 
 
     
