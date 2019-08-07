@@ -1,7 +1,7 @@
 from django import forms
 from account.models import User
 from .models import Team, TeamMember
-from team_article.models import Article
+
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team

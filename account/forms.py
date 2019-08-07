@@ -47,3 +47,8 @@ class SignInForm(forms.Form):
 
     class Meta:
         fields = ['username', 'password']
+
+class UserChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']

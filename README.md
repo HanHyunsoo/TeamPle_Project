@@ -12,11 +12,13 @@ pip3 install -r requirements.txt
 
 가상환경 생성후 활성화하고 requirements.txt에 있는 필요한 패키지들 설치(리눅스 기준)
 
-## 모델 설계
+## 설계
 
-![DB](db.png)
+![DB](media/readme/db.png)
 
-![ERD](erd.png)
+![ERD](media/readme/erd.jpg)
+
+![FlowChart](media/readme/flowchart.jpg)
 
 ## 개발 체크리스트
 
@@ -33,7 +35,7 @@ pip3 install -r requirements.txt
 
 ### 해철
 
-- [ ] 플로우차트 구성
+- [x] 플로우차트 구성
 - [ ] 메일 앱 구현
 - [ ] 받는 사람 어떻게 추가할지 구상
 
