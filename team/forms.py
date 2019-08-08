@@ -14,7 +14,12 @@ class AddForm(forms.ModelForm):
     username = forms.CharField(max_length=20)
     class Meta:
         model = TeamMember
-        fields = ['username']        
+        fields = ['username']
+             
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = ['team_name', 'introduce', 'team_photo_url']   
 # class AddForm(forms.ModelForm):
 #     class Meta:
 #         model = User

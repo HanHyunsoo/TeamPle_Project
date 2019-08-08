@@ -43,4 +43,5 @@
 {% endfor %}
 <br>
 <br><br>
-<a href="{% url 'team:add_member' details.pk user.pk %}">팀추가하기!</a>
+<a href="{% url 'team:add_member' details.id%}">팀추가하기!</a>
+<a href="{% url 'team:correct_team' details.id%}">팀정보수정하기!</a>

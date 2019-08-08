@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.utils import timezone
 from .models import Team, TeamMember
 from account.models import User
-from .forms import TeamForm, AddForm
 from django.contrib.auth.decorators import login_required
-
+from .forms import TeamForm, AddForm, EditForm
 
 # Create your views here.
 # def correct_teammember(request, team_pk):
@@ -73,7 +72,23 @@ def add_member(request, team_id, user_id):
 
    else:
       form = AddForm()
-      return render(request, 'team/add_member.html', {'form':form})      
+      return render(request, 'team/add_member.html', {'form':form})
+
+
+def correct_team(request, team_id):
+   team_correct = get_object_or_404(Team, pk = team_id)
+   if request.method == "POST":
+      form = EditForm(data = request.POST, instance=request.team_correct)
+      if form.is_valid():
+         team_correct = form.save()
+         return redirect('team/correct_team', team_id)
+   else:
+      form = EditForm(instance = request.team_correct)
+      return redirect('team/correct_team', team_id)
+    
+      
+   
+
 
 @login_required
 def expulsion_member(request, team_id, user_id): #어느 팀에서 몇번 째 유저를 삭제할지.
