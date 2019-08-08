@@ -10,4 +10,5 @@ urlpatterns = [
     path('edit/<int:user_id>', views.edit, name='edit'),
     path('user_home/<int:user_pk>', views.user_home, name='user_home'),
     path('user_info/<int:user_pk>', views.user_info, name='user_imfo'),
+    path('schedule/', views.set_schedule, name='set_schedule'),
 ]
