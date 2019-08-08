@@ -43,5 +43,12 @@
 {% endfor %}
 <br>
 <br><br>
+<<<<<<< HEAD
+<a href="{% url 'team:add_member' details.pk user.pk %}">팀추가하기!</a>
+
 <a href="{% url 'team:add_member' details.id%}">팀추가하기!</a>
 <a href="{% url 'team:correct_team' details.id%}">팀정보수정하기!</a>
+=======
+<a href="{% url 'team:add_member' details.id%}">팀추가하기!</a>
+<a href="{% url 'team:correct_team' details.id%}">팀정보수정하기!</a>
+>>>>>>> f19559ab010cc143c5c55ffbc41f6ea7b5ef33f9
