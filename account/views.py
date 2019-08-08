@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect,get_object_or_404, HttpResponse
 from django.contrib import auth
-from .forms import SignUpForm, SignInForm, UserChangeForm
+from .forms import *
 from .models import User
 from team.models import Team, TeamMember
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
 
 # 회원가입
 def sign_up(request):
@@ -13,9 +15,9 @@ def sign_up(request):
         # 폼이 검증되면 로그인 되고 sign_up url로 넘어감(이 부분은 메인 화면으로 넘어가도록 수정할 예정)
         if form.is_valid():
             form.save()
-            user = User.objects.get(username=form.cleaned_data['username'])
-            auth.login(request, user)
-            return redirect('account:user_home', user.id)
+            auth.login(request, User.objects.get(username=form.cleaned_data['username']))
+            user = request.user
+            return redirect('account:user_home', user.pk)
         # 폼이 검증이 안되면 22번째 줄로 넘어가 에러메세지를 포함한 폼을 보내 템플릿을 렌더링함
     # request가 get이면 빈폼을 생성하고 22번째로 넘어가 템플릿 렌더링
     else:
@@ -46,20 +48,29 @@ def sign_in(request):
         form = SignInForm()
         return render(request, 'account/sign_in.html', {'form': form})
 
+
 def user_home(request, user_pk):
-    user = get_object_or_404(User, pk=user_pk)
-    user_team = TeamMember.objects.filter(user=user)   
-    return render(request, 'account/user_home.html', {'user':user, 'user_team':user_team})
+    user = request.user
+    if user.id == user_pk:
+        user = get_object_or_404(User, pk=user_pk)
+        user_team = TeamMember.objects.filter(user=user)   
+        return render(request, 'account/user_home.html', {'user':user, 'user_team':user_team})
+    
+    else: # 현재사용자가 다른 사용자의 홈을 들어갈경우 로그인창으로 돌아가게 함
+        return redirect('account:sign_in')
+
 
 # 로그아웃
 def sign_out(request):
     auth.logout(request)
     return redirect('account:sign_in')
 
-#팀 유저의 개인정보를 보여주는 창
+
+# 팀 유저의 개인정보를 보여주는 창
 def user_info(request, user_pk): 
    user = get_object_or_404(User, pk=user_pk)
    return render(request, 'account/user_info.html', {'user':user})
+
 
 # 개인정보수정
 def edit(request, user_id):
@@ -68,7 +79,22 @@ def edit(request, user_id):
         form = UserChangeForm(data=request.POST, instance=request.user)
         if form.is_valid():
             user = form.save()
-            return redirect("account:user_home", user_id)
+            return redirect("account:user_home", user_pk)
     else:
         form = UserChangeForm(instance=request.user)
-        return render(request, "account/edit.html", {'form':form})
+        return render(request, "account/edit.html", {'form': form})
+
+
+# 시간표 설정
+def set_schedule(request):
+    user = get_object_or_404(User, pk=request.user.id)
+    if request.method == "POST":
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            user.time_table = form.cleaned_data['time_table']
+            user.save()
+        return redirect("main:home")
+    else:
+        form = ScheduleForm(instance=request.user)
+    return render(request, "account/schedule.html", {'form': form})
+  

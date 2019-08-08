@@ -6,7 +6,7 @@ from .models import Team, TeamMember
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ['team_name', 'introduce']
+        fields = ['team_name', 'introduce', 'team_photo_url']
 
 # class AddForm(forms.Form):
 #     username = forms.CharField(max_length=20)

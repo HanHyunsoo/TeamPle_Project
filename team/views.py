@@ -2,35 +2,52 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.utils import timezone
 from .models import Team, TeamMember
 from account.models import User
+from django.contrib.auth.decorators import login_required
 from .forms import TeamForm, AddForm, EditForm
 
 # Create your views here.
+# def correct_teammember(request, team_pk):
+#    team = get_object_or_404(Team, pk=team_pk)
+#    user = request.user
+#    for i in TeamMember.objects.filter(team__team_name=team.team_name):
+#       if i.user.pk == user.pk:
+#          return render
 
+
+
+@login_required
 def detail_team(request, team_id, user_id):
    user = get_object_or_404(User, pk=user_id)
+   login_user = request.user
    details = get_object_or_404(Team, pk=team_id)
    team_member = TeamMember.objects.filter(team=details)
-   return render(request, 'team/detail_team.html', {'details': details,'user':user, 'team_member':team_member})
+   for i in TeamMember.objects.filter(team__team_name=details.team_name):
+      if i.user.pk == login_user.pk:         
+         return render(request, 'team/detail_team.html', {'details': details,'user':user, 'team_member':team_member})
+   
+   return redirect('account:user_home', login_user.pk)
+   
 
-
+@login_required
 def create_team(request, user_id):
    # user = get_object_or_404(User, pk=user_id)
    user = request.user
    if request.method == 'POST':
-         form = TeamForm(request.POST)
-         if form.is_valid():
-            team = form.save()
-            TeamMember.objects.create(team=team, user=user)
-            # team.members.add(user)
-            team.team_leader.add(user)
-            team.created_date = timezone.now()
-            team.save()
-            return redirect('team:detail_team', team.id, user.id)
+      form = TeamForm(request.POST)
+      if form.is_valid():
+         team = form.save()
+         TeamMember.objects.create(team=team, user=user)
+         # team.members.add(user)
+         team.team_leader.add(user)
+         team.created_date = timezone.now()
+         team.save()
+         return redirect('team:detail_team', team.id, user.id)
    else:
-         teamform = TeamForm()
-         return render(request, 'team/create_team.html', {'teamform': teamform})
+      teamform = TeamForm()
+      return render(request, 'team/create_team.html', {'teamform': teamform})
 
 
+@login_required
 def add_member(request, team_id, user_id):
    team1 = get_object_or_404(Team, pk=team_id)
    if request.method == 'POST':
@@ -43,7 +60,7 @@ def add_member(request, team_id, user_id):
                if TeamMember.objects.filter(team=team1, user=member.user): #해당 팀에 user가 이미 존재해 있는 경우
                   return HttpResponse('해당사용자가 팀에 존재합니다!')
             
-               else: # 해당 팀에 user가 존재하지 않는다면
+               else: # 해당 팀에 user가 존재하지 않는다면 멤버로 추가
                   tm = TeamMember(team=team1, user=member.user) 
                   tm.save()
                   return redirect('team:detail_team', team_id, user_id)
@@ -73,6 +90,7 @@ def correct_team(request, team_id):
    
 
 
+@login_required
 def expulsion_member(request, team_id, user_id): #어느 팀에서 몇번 째 유저를 삭제할지.
    login_user = request.user
    team = get_object_or_404(Team, pk=team_id)  #어느 팀 객체인지 가져오고
@@ -91,15 +109,28 @@ def expulsion_member(request, team_id, user_id): #어느 팀에서 몇번 째 �
 #    # else:
 #    #    return HttpResponse('해당 리더가 아닙니다!') 
 
+@login_required
 def leave_team(request, team_id, user_id):
    user = get_object_or_404(User, pk=user_id)
    team = get_object_or_404(Team, pk=team_id)
-   if TeamMember.objects.filter(team=team):  #TeamMember 안에 객체가 있으면 해당 유저를 팀에서 나가고
-      leave = TeamMember.objects.filter(team=team, user=user)
-      leave.delete()      
-      return redirect('account:user_home', user_id)
+   leave = TeamMember.objects.filter(team=team, user=user)
+   leave.delete()
    
+   if TeamMember.objects.filter(team__team_name=team.team_name).count() != 0:
+      if Team.objects.filter(team_leader__pk = user_id):
+         next_leader = TeamMember.objects.filter(team__team_name=team.team_name).first()
+         leader = get_object_or_404(User, pk=next_leader.user.pk)
+         team.team_leader.set([leader])
+         team.save()
+         return redirect('account:user_home', user_id)
+      return HttpResponse('리더 위임 실패')
+
    else:
-      team = get_object_or_404(Team, pk=team_id)
       team.delete()
-      return 
+      return redirect('account:user_home', user_id)
+
+# def edit_team(request, team_id):
+#    edit_team = get_object_or_404(Team, pk= team_id)
+#    if request.method == 'POST':
+#       form = TeamForm(data = request.POST, instance= request.edit_team)
+   
