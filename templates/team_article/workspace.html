@@ -31,6 +31,9 @@
  주소: <a href="{{ i.url }}" target="_blank">{{ i.url }}</a> <br>
 설명:{{ i.explain_content}}
 {{i.created_date }}
+{% if user.id == now_user.id %}
+<a href="{% url 'team_article:delete_articleurl' team.pk user.pk i.pk %}">삭제</a>
+{% endif %}
 <br><br><br>
 {% endfor %}
 
@@ -39,6 +42,9 @@
 파일 아이디={{i.id}}
 <br>
 <a href="{{ i.file_url.url }}" download>{{ i.file_url }}</a>
+{% if user.id == now_user.id %}
+<a href="{% url 'team_article:delete_articlefile' team.pk user.pk i.pk %}">삭제</a>
+{% endif %}
 <br>
 설명: {{i.explain_content}}
 <br>
