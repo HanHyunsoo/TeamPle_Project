@@ -3,6 +3,7 @@ from django.contrib import auth
 from .forms import SignUpForm, SignInForm, UserChangeForm
 from .models import User
 from team.models import Team, TeamMember
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -14,7 +15,9 @@ def sign_up(request):
         if form.is_valid():
             form.save()
             auth.login(request, User.objects.get(username=form.cleaned_data['username']))
-            return redirect('account:sign_up')
+            user = request.user
+            return redirect('account:user_home', user.pk)
+
         # 폼이 검증이 안되면 22번째 줄로 넘어가 에러메세지를 포함한 폼을 보내 템플릿을 렌더링함
     # request가 get이면 빈폼을 생성하고 22번째로 넘어가 템플릿 렌더링
     else:
@@ -44,9 +47,14 @@ def sign_in(request):
         return render(request, 'account/sign_in.html', {'form': form})
 
 def user_home(request, user_pk):
-    user = get_object_or_404(User, pk=user_pk)
-    user_team = TeamMember.objects.filter(user=user)   
-    return render(request, 'account/user_home.html', {'user':user, 'user_team':user_team})
+    user = request.user
+    if user.id == user_pk:
+        user = get_object_or_404(User, pk=user_pk)
+        user_team = TeamMember.objects.filter(user=user)   
+        return render(request, 'account/user_home.html', {'user':user, 'user_team':user_team})
+    
+    else: # 현재사용자가 다른 사용자의 홈을 들어갈경우 로그인창으로 돌아가게 함
+        return redirect('account:sign_in')
 
 # 로그아웃
 def sign_out(request):
@@ -59,15 +67,14 @@ def user_info(request, user_pk):
    return render(request, 'account/user_info.html', {'user':user})
 
 # 개인정보수정
-"""
-def edit(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+
+def edit(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
     if request.method == "POST":
         form = UserChangeForm(data=request.POST, instance=request.user)
         if form.is_valid():
             user = form.save()
-            return redirect("account:user_home", user_id)
+            return redirect("account:user_home", user_pk)
     else:
         form = UserChangeForm(instance=request.user)
         return render(request, "account/edit.html", {'form':form})
-"""

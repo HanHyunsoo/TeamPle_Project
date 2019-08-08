@@ -24,6 +24,7 @@ def send_mail(request, from_id):
         form = MailForm()
         return render(request, 'mail/send_mail.html', {'form': form})
 
+
 def mailbox(request, user_id):
     mails = get_object_or_404(User, pk=user_id)
     return render(request, 'mail/mailbox.html', {'mails': mails})

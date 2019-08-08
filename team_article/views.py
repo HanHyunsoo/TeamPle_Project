@@ -65,3 +65,13 @@ def articlefile(request, team_pk, user_pk):
         return(request, 'team_article/file.html', {'form':form})
 
 
+def delete_articleurl(request, team_pk, user_pk, url_pk):
+    url = ArticleUrl.objects.filter(pk=url_pk)
+    url.delete()
+    return redirect('team_article:workspace', team_pk, user_pk)
+
+
+def delete_articlefile(request, team_pk, user_pk, file_pk):
+    files = ArticleFile.objects.filter(pk=file_pk)
+    files.delete()
+    return redirect('team_article:workspace', team_pk, user_pk)
