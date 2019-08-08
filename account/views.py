@@ -13,8 +13,9 @@ def sign_up(request):
         # 폼이 검증되면 로그인 되고 sign_up url로 넘어감(이 부분은 메인 화면으로 넘어가도록 수정할 예정)
         if form.is_valid():
             form.save()
-            auth.login(request, User.objects.get(username=form.cleaned_data['username']))
-            return redirect('account:sign_up')
+            user = User.objects.get(username=form.cleaned_data['username'])
+            auth.login(request, user)
+            return redirect('account:user_home', user.id)
         # 폼이 검증이 안되면 22번째 줄로 넘어가 에러메세지를 포함한 폼을 보내 템플릿을 렌더링함
     # request가 get이면 빈폼을 생성하고 22번째로 넘어가 템플릿 렌더링
     else:
@@ -35,7 +36,7 @@ def sign_in(request):
             # user가 존재하면 로그인을 하고 메인화면으로 넘어감(메인이 구현안되있어 로그인으로 넘어가게 수정함)
             if user:
                 auth.login(request, user)
-                return redirect('account:user_home', user.id)
+                return redirect('account:user_home', user.pk)
             # 만약 존재하지 않으면 form에 에러메세지를 추가하고 46번째 줄로넘어가 템플릿을 렌더링함
             else:
                 form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다.')
