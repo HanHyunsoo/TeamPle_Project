@@ -59,7 +59,7 @@ def user_info(request, user_pk):
    return render(request, 'account/user_info.html', {'user':user})
 
 # 개인정보수정
-"""
+
 def edit(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.method == "POST":
@@ -70,4 +70,3 @@ def edit(request, user_id):
     else:
         form = UserChangeForm(instance=request.user)
         return render(request, "account/edit.html", {'form':form})
-"""
