@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect,get_object_or_404, HttpResponse
 from django.contrib import auth
 from .forms import SignUpForm, SignInForm, UserChangeForm
 from .models import User
@@ -37,8 +37,10 @@ def sign_in(request):
                 auth.login(request, user)
                 return redirect('account:user_home', user.id)
             # 만약 존재하지 않으면 form에 에러메세지를 추가하고 46번째 줄로넘어가 템플릿을 렌더링함
-            form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다.')
+            else:
+                form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다.')
     # 방식이 get일때 빈폼을 생성하고 46번째 줄로넘어가 로그인 템플릿을 폼을 포함하여 렌더링한다
+
     else:
         form = SignInForm()
         return render(request, 'account/sign_in.html', {'form': form})
@@ -59,7 +61,6 @@ def user_info(request, user_pk):
    return render(request, 'account/user_info.html', {'user':user})
 
 # 개인정보수정
-"""
 def edit(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.method == "POST":
@@ -70,4 +71,3 @@ def edit(request, user_id):
     else:
         form = UserChangeForm(instance=request.user)
         return render(request, "account/edit.html", {'form':form})
-"""

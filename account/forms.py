@@ -19,6 +19,24 @@ class SignUpForm(forms.ModelForm):
                   'first_name',
                   'last_name'
                   ]
+        # widgets = {
+        #     'username': forms.TextInput(attrs={'class' : 'background_form'}),
+        #     'password' : forms.PasswordInput(attrs={'class' : 'background_form'}),
+        #     'check_password' : forms.PasswordInput(attrs={'class' : 'background_form'}),
+        #     'email': forms.EmailInput(attrs={'class' : 'background_form'}),
+        #     'phone_number':forms.TextInput(attrs={'class' : 'background_form'}),
+        #     'first_name':forms.TextInput(attrs={'class' : 'background_form'}),
+        #     'last_name':forms.TextInput(attrs={'class' : 'background_form'}),
+        # }
+        # labels = {
+        #     'username': '닉네임',
+        #     'password': '패스워드',
+        #     'check_password': '패스워드 확인',
+        #     'email': '이메일',
+        #     'phone_number':'전화번호',
+        #     'first_name':'성',
+        #     'last_name':'이름',
+        # }
 
     def clean_username(self):
         check_username = self.cleaned_data['username']
@@ -42,9 +60,8 @@ class SignUpForm(forms.ModelForm):
 
 
 class SignInForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
-
+    username = forms.CharField(label='')
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'password'}), label='')
     class Meta:
         fields = ['username', 'password']
 
