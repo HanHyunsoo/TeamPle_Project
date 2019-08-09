@@ -10,6 +10,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all">
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">#}
     <!-- Custom Theme files -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <!--js-->
@@ -20,6 +21,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
     <!--//skycons-icons-->
+    {#    프로젝트 css#}
+    <link rel="stylesheet" href="{% static 'account/sign_in.css' %}">
+    <link rel="stylesheet" href="{% static 'account/sign_up.css' %}">
 </head>
 <body>
 <div class="page-container">
@@ -43,140 +47,140 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"> </div>
                 </div>
                 <div class="header-right">
-                    <div class="profile_details_left"><!--notifications of menu start -->
-                        <ul class="nofitications-dropdown">
-                            <li class="dropdown head-dpdn">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="notification_header">
-                                            <h3>You have 3 new messages</h3>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">
-                                        <div class="user_img"><img src="{% static 'images/p4.png' %}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                    <li class="odd"><a href="#">
-                                        <div class="user_img"><img src="{% static 'images/p2.png' %}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <div class="user_img"><img src="{% static 'images/p3.png' %}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                    <li>
-                                        <div class="notification_bottom">
-                                            <a href="#">See all messages</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown head-dpdn">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="notification_header">
-                                            <h3>You have 3 new notification</h3>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">
-                                        <div class="user_img"><img src="{% static 'images/p5.png' %}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                    <li class="odd"><a href="#">
-                                        <div class="user_img"><img src="{% static 'images/p6.png' %}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <div class="user_img"><img src="{% static 'images/p7.png' %}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                    <li>
-                                        <div class="notification_bottom">
-                                            <a href="#">See all notifications</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown head-dpdn">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">9</span></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="notification_header">
-                                            <h3>You have 8 pending task</h3>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Database update</span><span class="percentage">40%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar yellow" style="width:40%;"></div>
-                                        </div>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar green" style="width:90%;"></div>
-                                        </div>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Mobile App</span><span class="percentage">33%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar red" style="width: 33%;"></div>
-                                        </div>
-                                    </a></li>
-                                    <li><a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar  blue" style="width: 80%;"></div>
-                                        </div>
-                                    </a></li>
-                                    <li>
-                                        <div class="notification_bottom">
-                                            <a href="#">See all pending tasks</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <div class="clearfix"> </div>
-                    </div>
+                    {#                    <div class="profile_details_left"><!--notifications of menu start -->#}
+                    {#                        <ul class="nofitications-dropdown">#}
+                    {#                            <li class="dropdown head-dpdn">#}
+                    {#                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>#}
+                    {#                                <ul class="dropdown-menu">#}
+                    {#                                    <li>#}
+                    {#                                        <div class="notification_header">#}
+                    {#                                            <h3>You have 3 new messages</h3>#}
+                    {#                                        </div>#}
+                    {#                                    </li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="user_img"><img src="{% static 'images/p4.png' %}" alt=""></div>#}
+                    {#                                        <div class="notification_desc">#}
+                    {#                                            <p>Lorem ipsum dolor</p>#}
+                    {#                                            <p><span>1 hour ago</span></p>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="clearfix"></div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li class="odd"><a href="#">#}
+                    {#                                        <div class="user_img"><img src="{% static 'images/p2.png' %}" alt=""></div>#}
+                    {#                                        <div class="notification_desc">#}
+                    {#                                            <p>Lorem ipsum dolor </p>#}
+                    {#                                            <p><span>1 hour ago</span></p>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="clearfix"></div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="user_img"><img src="{% static 'images/p3.png' %}" alt=""></div>#}
+                    {#                                        <div class="notification_desc">#}
+                    {#                                            <p>Lorem ipsum dolor</p>#}
+                    {#                                            <p><span>1 hour ago</span></p>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="clearfix"></div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li>#}
+                    {#                                        <div class="notification_bottom">#}
+                    {#                                            <a href="#">See all messages</a>#}
+                    {#                                        </div>#}
+                    {#                                    </li>#}
+                    {#                                </ul>#}
+                    {#                            </li>#}
+                    {#                            <li class="dropdown head-dpdn">#}
+                    {#                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>#}
+                    {#                                <ul class="dropdown-menu">#}
+                    {#                                    <li>#}
+                    {#                                        <div class="notification_header">#}
+                    {#                                            <h3>You have 3 new notification</h3>#}
+                    {#                                        </div>#}
+                    {#                                    </li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="user_img"><img src="{% static 'images/p5.png' %}" alt=""></div>#}
+                    {#                                        <div class="notification_desc">#}
+                    {#                                            <p>Lorem ipsum dolor</p>#}
+                    {#                                            <p><span>1 hour ago</span></p>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="clearfix"></div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li class="odd"><a href="#">#}
+                    {#                                        <div class="user_img"><img src="{% static 'images/p6.png' %}" alt=""></div>#}
+                    {#                                        <div class="notification_desc">#}
+                    {#                                            <p>Lorem ipsum dolor</p>#}
+                    {#                                            <p><span>1 hour ago</span></p>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="clearfix"></div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="user_img"><img src="{% static 'images/p7.png' %}" alt=""></div>#}
+                    {#                                        <div class="notification_desc">#}
+                    {#                                            <p>Lorem ipsum dolor</p>#}
+                    {#                                            <p><span>1 hour ago</span></p>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="clearfix"></div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li>#}
+                    {#                                        <div class="notification_bottom">#}
+                    {#                                            <a href="#">See all notifications</a>#}
+                    {#                                        </div>#}
+                    {#                                    </li>#}
+                    {#                                </ul>#}
+                    {#                            </li>#}
+                    {#                            <li class="dropdown head-dpdn">#}
+                    {#                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">9</span></a>#}
+                    {#                                <ul class="dropdown-menu">#}
+                    {#                                    <li>#}
+                    {#                                        <div class="notification_header">#}
+                    {#                                            <h3>You have 8 pending task</h3>#}
+                    {#                                        </div>#}
+                    {#                                    </li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="task-info">#}
+                    {#                                            <span class="task-desc">Database update</span><span class="percentage">40%</span>#}
+                    {#                                            <div class="clearfix"></div>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="progress progress-striped active">#}
+                    {#                                            <div class="bar yellow" style="width:40%;"></div>#}
+                    {#                                        </div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="task-info">#}
+                    {#                                            <span class="task-desc">Dashboard done</span><span class="percentage">90%</span>#}
+                    {#                                            <div class="clearfix"></div>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="progress progress-striped active">#}
+                    {#                                            <div class="bar green" style="width:90%;"></div>#}
+                    {#                                        </div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="task-info">#}
+                    {#                                            <span class="task-desc">Mobile App</span><span class="percentage">33%</span>#}
+                    {#                                            <div class="clearfix"></div>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="progress progress-striped active">#}
+                    {#                                            <div class="bar red" style="width: 33%;"></div>#}
+                    {#                                        </div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li><a href="#">#}
+                    {#                                        <div class="task-info">#}
+                    {#                                            <span class="task-desc">Issues fixed</span><span class="percentage">80%</span>#}
+                    {#                                            <div class="clearfix"></div>#}
+                    {#                                        </div>#}
+                    {#                                        <div class="progress progress-striped active">#}
+                    {#                                            <div class="bar  blue" style="width: 80%;"></div>#}
+                    {#                                        </div>#}
+                    {#                                    </a></li>#}
+                    {#                                    <li>#}
+                    {#                                        <div class="notification_bottom">#}
+                    {#                                            <a href="#">See all pending tasks</a>#}
+                    {#                                        </div>#}
+                    {#                                    </li>#}
+                    {#                                </ul>#}
+                    {#                            </li>#}
+                    {#                        </ul>#}
+                    {#                        <div class="clearfix"> </div>#}
+                    {#                    </div>#}
                     <!--notification menu end -->
                     <div class="profile_details">
                         <ul>
@@ -197,13 +201,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <ul class="dropdown-menu drp-mnu">
                                         <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
                                         <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-                                        <li> <a href="{% url 'account:sign_out' %}"><i class="fa fa-sign-out"></i>로그아웃</a> </li>
+                                        <li> <a href="{% url 'account:sign_out' %}"><i class="fa fa-sign-out"></i>로그아웃</a></li>
                                     </ul>
                                 {% else %}
                                     <div class="profile_img">
                                         <div class="user-name">
-                                            <p>a</p>
-                                            <p>b</p>
+                                            {#                                            <ul>#}
+                                            {#                                                <li><a href="{% url 'account:sign_in' %}"><i class="fa fa-sign-out"></i> 로그인</a></li>#}
+                                            {#                                                <li><a href="#"><i class="fa fa-user"></i> 회원가입</a> </li>#}
+                                            {#                                            </ul>#}
+                                            <h4><p><i class="fa fa-sign-out"></i><a href="{% url 'account:sign_in' %}"> 로그인</a></p></h4>
+                                            <h4><p><i class="fa fa-user"></i><a href="{% url 'account:sign_up' %}"> 회원가입</a></p></h4>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -235,7 +243,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!--inner block start here-->
             <div class="inner-block">
                 <div class="blank">
-                    <h2>Blank Page</h2>
                     {% block content %}
                     {% endblock %}
                 </div>
