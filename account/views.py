@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 def sign_up(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
-        # 폼이 검증되면 로그인 되고 sign_up url로 넘어감(이 부분은 메인 화면으로 넘어가도록 수정할 예정)
+        # 폼이 검증되면 로그인 되고 sign_up url로 넘어감(이 부분은 메인 화면으로 넘어  가도록 수정할 예정)
         if form.is_valid():
             form.save()
             auth.login(request, User.objects.get(username=form.cleaned_data['username']))
