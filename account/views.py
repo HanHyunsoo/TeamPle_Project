@@ -71,10 +71,9 @@ def user_info(request, user_pk):
    user = get_object_or_404(User, pk=user_pk)
    return render(request, 'account/user_info.html', {'user':user})
 
-
 # 개인정보수정
-def edit(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+def edit(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
     if request.method == "POST":
         form = UserChangeForm(data=request.POST, instance=request.user)
         if form.is_valid():
