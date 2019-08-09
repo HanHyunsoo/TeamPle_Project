@@ -27,18 +27,14 @@ def send_mail(request, from_id):
 
 def mailbox(request, user_id):
     mails = get_object_or_404(User, pk=user_id)
-    return render(request, 'mail/mailbox.html', {'mails': mails})
+    mail_count = Mail.objects.filter(to_user__username=mails.username).count()
+    return render(request, 'mail/mailbox.html', {'mails': mails, 'mail_count': mail_count})
 
 def delete_mail(request, mail_id):
     mail = get_object_or_404(Mail, pk=mail_id)
     mail.delete()
     return redirect('account:sign_in')
 
-    
-
-# def send_mail(request):
-#     if request.method == "POST":
-
-#     else:
-#         form = MailForm()
-#         return render(request, 'mail/send_mail.html', {'form': form})
+def detail_mail(request, mail_id):
+    mails = get_object_or_404(Mail, pk=mail_id)
+    return render(request, 'mail/detail_mail.html', {'mails': mails})

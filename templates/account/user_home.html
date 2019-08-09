@@ -1,15 +1,60 @@
-<h1>{{user.username}}의 페이지입니다!</h1>
-<p><a href="{% url 'account:sign_out' %}">Sign out</a></p>
-<a href="{% url 'team:create_team' user.id %}"><h1>팀만들래?</h1></a>
-<a href="{% url 'mail:mailbox' user.id %}">메일함</a>
-<a href="{% url 'account:edit' user.pk %}">개인정보수정</a>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+
+	<link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/user_home.css' %}">
+
+	<title>u임승차</title>
+</head>
+<!-- <nav>
+        <h2>{{user.username}}님 환영합니다!</h2>
+    <table>
+        <tr>
+            <td></td>
+            <td><a href="{% url 'team:create_team' user.id %}">팀만들래?</a></td>
+            <td><a href="{% url 'mail:mailbox' user.id %}">메일함</a></td>
+            <td><a href="{% url 'account:edit' user.pk %}">개인정보수정</a></td>
+        </tr>
+    </table>
+</nav> -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a href="#" class="navbar-brand">{{user.username}}님 환영합니다!</a>
+        <!-- Toggle Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="{% url 'account:sign_out' %}" class="nav-link">Sign out</a></li>
+                <li class="nav-item"><a href="{% url 'team:create_team' user.id %}" class="nav-link">팀만들래?</a></li>
+                <li class="nav-item"><a href="{% url 'mail:mailbox' user.id %}" class="nav-link">메일함</a></li>
+                <li class="nav-item"><a href="{% url 'account:edit' user.pk %}" class="nav-link">개인정보수정</a></li>
+            </ul>
+        </div>
+    </nav>
+<button type="button" class="btn btn-secondary" id="teambutton">
+        내가 속한 팀 목록 <span class="badge badge-light">2</span>
+        <span class="sr-only">unread messages</span>
+      </button>
 {% for userteam in user_team %}
 <p>
-<a href="{% url 'team:detail_team' userteam.team.id user.id %}">{{ userteam.team.team_name }}</a>
-소개:{{ userteam.team.introduce }}
+    팀 이름: <a href="{% url 'team:detail_team' userteam.team.id user.id %}" class="badge badge-dark">{{ userteam.team.team_name }}</a>
+    <br>
+    간략한 팀 소개:{{ userteam.team.introduce }}
 </p>
 <br>
 {% endfor %}
 
 {% block add %}
 {% endblock %}
+
+</html>
