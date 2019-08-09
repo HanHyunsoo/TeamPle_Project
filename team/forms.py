@@ -17,10 +17,6 @@ class AddForm(forms.ModelForm):
         model = TeamMember
         fields = ['username']
              
-class EditForm(forms.ModelForm):
-    class Meta:
-        model = Team
-        fields = ['team_name', 'introduce', 'team_photo_url']   
 # class AddForm(forms.ModelForm):
 #     class Meta:
 #         model = User
