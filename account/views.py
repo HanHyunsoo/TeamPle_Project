@@ -63,7 +63,7 @@ def user_home(request, user_pk):
 # 로그아웃
 def sign_out(request):
     auth.logout(request)
-    return redirect('account:sign_in')
+    return redirect('main:home')
 
 
 # 팀 유저의 개인정보를 보여주는 창
