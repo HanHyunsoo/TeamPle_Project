@@ -13,8 +13,6 @@ from .forms import TeamForm, AddForm
 #       if i.user.pk == user.pk:
 #          return render
 
-
-
 @login_required
 def detail_team(request, team_id, user_id):
    details = get_object_or_404(Team, pk=team_id)
