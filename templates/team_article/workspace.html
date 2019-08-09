@@ -1,6 +1,5 @@
-{{ user.username }}의 작업공간
-{{ user.id }}
-{{ now_user.id }}
+<h1>{{user.username}}의 작업공간입니다</h1>
+<br>
 {% if user.id == now_user.id %}
 <table>
     <tr>
@@ -26,6 +25,9 @@
     </tr>
 </table>
 {% endif %}
+<a href="{% url 'team:detail_team' team.pk user.pk %}">팀으로..</a>
+
+<div class="container">
 <h1>주소가 모인 게시판</h1>
 {% for i in search_url.all %}
  주소: <a href="{{ i.url }}" target="_blank">{{ i.url }}</a> <br>
@@ -36,7 +38,8 @@
 {% endif %}
 <br><br><br>
 {% endfor %}
-
+</div>
+<div class="container">
 <h1>파일이 모인 게시판</h1>
 {% for i in search_file.all %}
 파일 아이디={{i.id}}
@@ -49,3 +52,4 @@
 설명: {{i.explain_content}}
 <br>
 {% endfor %}
+</div>

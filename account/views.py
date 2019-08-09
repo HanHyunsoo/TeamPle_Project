@@ -93,7 +93,7 @@ def set_schedule(request):
         if form.is_valid():
             user.time_table = form.cleaned_data['time_table']
             user.save()
-        return redirect("main:home")
+        return redirect("account:user_home", user.pk)
     else:
         form = ScheduleForm(instance=request.user)
     return render(request, "account/schedule.html", {'form': form})
