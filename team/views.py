@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Team, TeamMember
 from account.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import TeamForm, AddForm, EditForm
+from .forms import TeamForm, AddForm
 
 # Create your views here.
 # def correct_teammember(request, team_pk):
@@ -17,21 +17,22 @@ from .forms import TeamForm, AddForm, EditForm
 
 @login_required
 def detail_team(request, team_id, user_id):
+   details = get_object_or_404(Team, pk=team_id)
    user = get_object_or_404(User, pk=user_id)
    login_user = request.user
-   details = get_object_or_404(Team, pk=team_id)
    team_member = TeamMember.objects.filter(team=details)
-   for i in TeamMember.objects.filter(team__team_name=details.team_name):
+   for i in TeamMember.objects.filter(team__pk=details.pk):
       if i.user.pk == login_user.pk:         
-         return render(request, 'team/detail_team.html', {'details': details,'user':user, 'team_member':team_member})
+         return render(request, 'team/detail_team.html', {'details': details,'user':user, 'team_member':team_member, 'login_user':login_user})
    
    return redirect('account:user_home', login_user.pk)
    
 
 @login_required
-def create_team(request, user_id):
+def create_team(request, team_pk):
    # user = get_object_or_404(User, pk=user_id)
    user = request.user
+   
    if request.method == 'POST':
       form = TeamForm(request.POST)
       if form.is_valid():
@@ -39,9 +40,11 @@ def create_team(request, user_id):
          TeamMember.objects.create(team=team, user=user)
          # team.members.add(user)
          team.team_leader.add(user)
+         team.team_name = form.cleaned_data['team_name']
+         team.introduce = form.cleaned_data['introduce']
          team.created_date = timezone.now()
          team.save()
-         return redirect('team:detail_team', team.id, user.id)
+         return redirect('team:detail_team', team.pk, user.pk)
    else:
       teamform = TeamForm()
       return render(request, 'team/create_team.html', {'teamform': teamform})
@@ -50,6 +53,8 @@ def create_team(request, user_id):
 @login_required
 def add_member(request, team_id, user_id):
    team1 = get_object_or_404(Team, pk=team_id)
+   login_user = request.user
+
    if request.method == 'POST':
       form = AddForm(request.POST)
       if form.is_valid():
@@ -69,26 +74,12 @@ def add_member(request, team_id, user_id):
          #    return HttpResponse('해당사용자가 팀에 존재합니다!')
          else:
             return HttpResponse('해당 사용자가 존재하지 않습니다!')
-
    else:
-      form = AddForm()
-      return render(request, 'team/add_member.html', {'form':form})
-
-
-def correct_team(request, team_id):
-   team_correct = get_object_or_404(Team, pk = team_id)
-   if request.method == "POST":
-      form = EditForm(data = request.POST, instance=request.team_correct)
-      if form.is_valid():
-         team_correct = form.save()
-         return redirect('team/correct_team', team_id)
-   else:
-      form = EditForm(instance = request.team_correct)
-      return redirect('team/correct_team', team_id)
-    
-      
-   
-
+      for i in TeamMember.objects.filter(team__pk=team1.pk):
+         if i.user.pk == login_user.pk: 
+            form = AddForm()
+            return render(request, 'team/add_member.html', {'form':form})
+      return redirect('account:uset_home', user_id)
 
 @login_required
 def expulsion_member(request, team_id, user_id): #어느 팀에서 몇번 째 유저를 삭제할지.
@@ -134,3 +125,17 @@ def leave_team(request, team_id, user_id):
 #    if request.method == 'POST':
 #       form = TeamForm(data = request.POST, instance= request.edit_team)
    
+def edit_team(request, team_pk):
+   team = get_object_or_404(Team, pk=team_pk)
+   user = request.user
+   if request.method == "POST":
+      form = TeamForm(request.POST)
+      if form.is_valid():
+         team.team_name = form.cleaned_data['team_name']
+         team.introduce = form.cleaned_data['introduce']
+         team.team_photho_url = form.cleaned_data['team_photo_url']
+         team.save()
+         return redirect('team:detail_team',team_pk, user.pk)
+   else:
+      teamform = TeamForm(instance=team)
+      return render(request, 'team/create_team.html', {'teamform':teamform})

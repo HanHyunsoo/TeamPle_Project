@@ -1,5 +1,10 @@
 <a href=" {% url 'account:user_home' user.pk %}">{{user.username}}의 사용자!</a> 
 <a href=" {% url 'team:leave_team' details.pk user.pk %}">팀 나가기!</a>
+{% for i in details.team_leader.all %}
+    {% if login_user.pk == i.pk %}    
+        <a href ="{% url 'team:edit_team' details.pk %}">팀 수정</a>
+    {% endif %}
+{% endfor %}
 <br>
 팀 번호={{ details.pk }}
 <br>
@@ -21,7 +26,7 @@
 {% for i in team_member.all %}
     <p>
         {% for k in details.team_leader.all %}
-        <a href="{% url 'account:user_imfo'  i.user.id %}">{{ i.user.username }}</a>
+        <a href="{% url 'account:user_info'  i.user.id %}">{{ i.user.username }}</a>
 
             {% if user.username == k.username %}
                 {% if i.user.id != k.id %}
@@ -43,12 +48,5 @@
 {% endfor %}
 <br>
 <br><br>
-<<<<<<< HEAD
-<a href="{% url 'team:add_member' details.pk user.pk %}">팀추가하기!</a>
 
-<a href="{% url 'team:add_member' details.id%}">팀추가하기!</a>
-<a href="{% url 'team:correct_team' details.id%}">팀정보수정하기!</a>
-=======
-<a href="{% url 'team:add_member' details.id%}">팀추가하기!</a>
-<a href="{% url 'team:correct_team' details.id%}">팀정보수정하기!</a>
->>>>>>> f19559ab010cc143c5c55ffbc41f6ea7b5ef33f9
+<a href="{% url 'team:add_member' details.pk user.pk %}">팀추가하기!</a>
