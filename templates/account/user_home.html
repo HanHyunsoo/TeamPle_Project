@@ -41,13 +41,13 @@
             </ul>
         </div>
     </nav>
-<button type="button" class="btn btn-primary" id="teambutton">
+<button type="button" class="btn btn-secondary" id="teambutton">
         내가 속한 팀 목록 <span class="badge badge-light">2</span>
         <span class="sr-only">unread messages</span>
       </button>
 {% for userteam in user_team %}
 <p>
-    팀 이름  :<a href="{% url 'team:detail_team' userteam.team.id user.id %}" class="badge badge-primary">{{ userteam.team.team_name }}</a>
+    팀 이름: <a href="{% url 'team:detail_team' userteam.team.id user.id %}" class="badge badge-dark">{{ userteam.team.team_name }}</a>
     <br>
     간략한 팀 소개:{{ userteam.team.introduce }}
 </p>
