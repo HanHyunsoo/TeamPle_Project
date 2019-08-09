@@ -1,23 +1,62 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-{#        <p>아이디</p>#}
-{#        {{ form.username }}#}
-{#        <p>비밀번호</p>#}
-{#        {{ form.password }}#}
-{#        <p>비밀번호 재입력</p>#}
-{#        {{ form.check_password }}#}
-{#        <p>이메일</p>#}
-{#        {{ form.email }}#}
-{#        <p>휴대전화번호</p>#}
-{#        {{ form.phone_number }}#}
-{#        <p>성</p>#}
-{#        {{ form.last_name }}#}
-{#        <p>이름</p>#}
-{#        {{ form.first_name }}#}
-        {{ form.as_p }}
-        <p><input type="submit" value="회원가입"></p>
-    </form>
+    <div id="sign-up-container" class="container">
+        <h2>회원가입</h2>
+        <form id="sign-up-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">아이디</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">비밀번호</label>
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">비밀번호 확인</label>
+                {{ form.check_password }}
+                {{ form.check_password.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">이메일</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.phone_number.id_for_label }}">휴대전화번호</label>
+                {{ form.phone_number }}
+                {{ form.phone_number.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}">성</label>
+                {{ form.last_name }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}">이름</label>
+                {{ form.first_name }}
+            </div>
+        </form>
+        <button type="input" class="btn btn-secondary btn-lg" onclick="check_account()">회원가입</button>
+    </div>
+
+
+    <script type="text/javascript">
+        function check_account() {
+            var form = document.getElementById("sign-up-form");
+            var password = document.getElementById("id_password").value;
+            var check_password = document.getElementById("id_check_password").value;
+
+            if (password == "" || check_password == "") {
+                alert("비밀번호를 입력해 주세요");
+            } else {
+                if (password != check_password) {
+                    alert("비밀번호를 다시 입력해주세요")
+                } else {
+                    form.submit();
+                }
+            }
+        }
+    </script>
 {% endblock %}

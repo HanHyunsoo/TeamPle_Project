@@ -22,7 +22,7 @@ def sign_up(request):
     # request가 get이면 빈폼을 생성하고 22번째로 넘어가 템플릿 렌더링
     else:
         form = SignUpForm()
-        return render(request, 'account/sign_up.html', {'form': form})
+    return render(request, 'account/sign_up.html', {'form': form})
 
 
 # 로그인
@@ -38,7 +38,7 @@ def sign_in(request):
             # user가 존재하면 로그인을 하고 메인화면으로 넘어감(메인이 구현안되있어 로그인으로 넘어가게 수정함)
             if user:
                 auth.login(request, user)
-                return redirect('account:user_home', user.pk)
+                return redirect('account:set_schedule')
             # 만약 존재하지 않으면 form에 에러메세지를 추가하고 46번째 줄로넘어가 템플릿을 렌더링함
             else:
                 form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다.')
@@ -46,7 +46,7 @@ def sign_in(request):
 
     else:
         form = SignInForm()
-        return render(request, 'account/sign_in.html', {'form': form})
+    return render(request, 'account/sign_in.html', {'form': form})
 
 
 def user_home(request, user_pk):
@@ -67,12 +67,13 @@ def sign_out(request):
 
 
 # 팀 유저의 개인정보를 보여주는 창
-def user_info(request, user_pk): 
+def user_info(request, user_pk):
    user = get_object_or_404(User, pk=user_pk)
    return render(request, 'account/user_info.html', {'user':user})
 
 
 # 개인정보수정
+@login_required
 def edit(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     if request.method == "POST":
@@ -86,6 +87,7 @@ def edit(request, user_id):
 
 
 # 시간표 설정
+@login_required
 def set_schedule(request):
     user = get_object_or_404(User, pk=request.user.id)
     if request.method == "POST":
