@@ -5,6 +5,7 @@ from account.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import TeamForm, AddForm
 
+
 # Create your views here.
 # def correct_teammember(request, team_pk):
 #    team = get_object_or_404(Team, pk=team_pk)
@@ -13,6 +14,36 @@ from .forms import TeamForm, AddForm
 #       if i.user.pk == user.pk:
 #          return render
 
+
+def or_gate(a, b):
+    result = ""
+    for i in range(len(a)):
+        if (a[i] == b[i]) and a[i] == '0':
+            result += '0'
+        else:
+            result += '1'
+
+    return result
+
+
+def not_gate(binary):
+    result = ""
+    for i in binary:
+        if i == '1':
+            result += '0'
+        else:
+            result += '1'
+    return result
+
+
+def get_time_table(team_id):
+    team = get_object_or_404(Team, pk=team_id)
+    team_members = team.members.all()
+    result_time_table = team_members[0].time_table
+    for member in team_members[1:]:
+        result_time_table = or_gate(result_time_table, member.time_table)
+
+    return not_gate(result_time_table)
 
 
 @login_required
@@ -85,49 +116,36 @@ def add_member(request, team_id, user_id):
 
 
 @login_required
-def expulsion_member(request, team_id, user_id): #어느 팀에서 몇번 째 유저를 삭제할지.
-   login_user = request.user
-   team = get_object_or_404(Team, pk=team_id)  #어느 팀 객체인지 가져오고
-   user = get_object_or_404(User, pk=user_id)  #어느 유저 객체인지 가져온 다음에
-   delete_member = TeamMember.objects.filter(team=team, user=user)  #외래키 설정 되어있는 team과 user 에 각각을 매칭 시켜주기
-   delete_member.delete()
-   return redirect('team:detail_team', team_id, login_user.id)
-    
-# def team_delete(request, team_id, user_id):  #team_id = 제거하려는 팀 id, user_id = 팀 리더의 값을 알아내기 위해.
-#    team_main = get_object_or_404(Team, pk=team_id)
-#    user_leader = get_object_or_404(User, pk=user_id)
-#    team_main = Team.objects.filter(team_leader=user_leader)
-#    team_main.delete()
-#    return redirect('account:user_home', user_id)
-   
-#    # else:
-#    #    return HttpResponse('해당 리더가 아닙니다!') 
+def expulsion_member(request, team_id, user_id):  # 어느 팀에서 몇번 째 유저를 삭제할지.
+    login_user = request.user
+    team = get_object_or_404(Team, pk=team_id)  # 어느 팀 객체인지 가져오고
+    user = get_object_or_404(User, pk=user_id)  # 어느 유저 객체인지 가져온 다음에
+    delete_member = TeamMember.objects.filter(team=team, user=user)  # 외래키 설정 되어있는 team과 user 에 각각을 매칭 시켜주기
+    delete_member.delete()
+    return redirect('team:detail_team', team_id, login_user.id)
+
 
 @login_required
 def leave_team(request, team_id, user_id):
-   user = get_object_or_404(User, pk=user_id)
-   team = get_object_or_404(Team, pk=team_id)
-   leave = TeamMember.objects.filter(team=team, user=user)
-   leave.delete()
-   
-   if TeamMember.objects.filter(team__team_name=team.team_name).count() != 0:
-      if Team.objects.filter(team_leader__pk = user_id):
-         next_leader = TeamMember.objects.filter(team__team_name=team.team_name).first()
-         leader = get_object_or_404(User, pk=next_leader.user.pk)
-         team.team_leader.set([leader])
-         team.save()
-         return redirect('account:user_home', user_id)
-      return HttpResponse('리더 위임 실패')
+    user = get_object_or_404(User, pk=user_id)
+    team = get_object_or_404(Team, pk=team_id)
+    leave = TeamMember.objects.filter(team=team, user=user)
+    leave.delete()
 
-   else:
-      team.delete()
-      return redirect('account:user_home', user_id)
+    if TeamMember.objects.filter(team__team_name=team.team_name).count() != 0:
+        if Team.objects.filter(team_leader__pk=user_id):
+            next_leader = TeamMember.objects.filter(team__team_name=team.team_name).first()
+            leader = get_object_or_404(User, pk=next_leader.user.pk)
+            team.team_leader.set([leader])
+            team.save()
+            return redirect('account:user_home', user_id)
+        return HttpResponse('리더 위임 실패')
 
-# def edit_team(request, team_id):
-#    edit_team = get_object_or_404(Team, pk= team_id)
-#    if request.method == 'POST':
-#       form = TeamForm(data = request.POST, instance= request.edit_team)
-   
+    else:
+        team.delete()
+        return redirect('account:user_home', user_id)
+
+      
 def edit_team(request, team_pk):
    team = get_object_or_404(Team, pk=team_pk)
    user = request.user
