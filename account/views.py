@@ -48,7 +48,6 @@ def sign_in(request):
         form = SignInForm()
     return render(request, 'account/sign_in.html', {'form': form})
 
-
 def user_home(request, user_pk):
     user = request.user
     if user.id == user_pk:
