@@ -14,7 +14,7 @@ from .forms import TeamForm, AddForm
 #       if i.user.pk == user.pk:
 #          return render
 
-
+# 2진 데이터를 or로 비교
 def or_gate(a, b):
     result = ""
     for i in range(len(a)):
@@ -26,6 +26,7 @@ def or_gate(a, b):
     return result
 
 
+# 2진 데이터를 not으로 변환
 def not_gate(binary):
     result = ""
     for i in binary:
@@ -36,6 +37,7 @@ def not_gate(binary):
     return result
 
 
+# or게이트와 not게이트를 이용해서 원하는 시간 이진 데이터를 구함.
 def get_time_table(team_id):
     team = get_object_or_404(Team, pk=team_id)
     team_members = team.members.all()
