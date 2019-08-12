@@ -17,7 +17,7 @@ def send_mail(request, from_id):
                 mail.created_data = timezone.now()
                 mail.modified_data = timezone.now()
                 mail.save()
-                return redirect('account:sign_in')
+                return redirect('main:home')
             else:
                 return HttpResponse('사용자가 없습니다.')
     else:
@@ -33,7 +33,7 @@ def mailbox(request, user_id):
 def delete_mail(request, mail_id):
     mail = get_object_or_404(Mail, pk=mail_id)
     mail.delete()
-    return redirect('account:sign_in')
+    return redirect('main:home')
 
 def detail_mail(request, mail_id):
     mails = get_object_or_404(Mail, pk=mail_id)
