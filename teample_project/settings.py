@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 # Auth
 AUTH_USER_MODEL = 'account.User'
 
+# Login
+LOGIN_URL = '/account/'
+
 # Application definition
 
 INSTALLED_APPS = [

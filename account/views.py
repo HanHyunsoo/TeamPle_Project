@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect,get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import auth
 from .forms import *
 from .models import User
-from team.models import Team, TeamMember
+from team.models import TeamMember
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -17,7 +17,7 @@ def sign_up(request):
             form.save()
             auth.login(request, User.objects.get(username=form.cleaned_data['username']))
             user = request.user
-            return redirect('account:user_home', user.pk)
+            return redirect('account:set_schedule', user.pk)
         # 폼이 검증이 안되면 22번째 줄로 넘어가 에러메세지를 포함한 폼을 보내 템플릿을 렌더링함
     # request가 get이면 빈폼을 생성하고 22번째로 넘어가 템플릿 렌더링
     else:
@@ -38,7 +38,7 @@ def sign_in(request):
             # user가 존재하면 로그인을 하고 메인화면으로 넘어감(메인이 구현안되있어 로그인으로 넘어가게 수정함)
             if user:
                 auth.login(request, user)
-                return redirect('account:set_schedule')
+                return redirect('main:home')
             # 만약 존재하지 않으면 form에 에러메세지를 추가하고 46번째 줄로넘어가 템플릿을 렌더링함
             else:
                 form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다.')
