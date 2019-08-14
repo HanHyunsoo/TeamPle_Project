@@ -26,7 +26,7 @@ pip3 install -r requirements.txt
 
 - [x] 회원가입, 로그인, 로그아웃 구현(account 앱)
 - [x] 시간표 자바스크립트 이용하여 저장
-- [ ] 시간표 비교(views.py)
+- [x] 시간표 비교(views.py)
 
 ### 수현
 
