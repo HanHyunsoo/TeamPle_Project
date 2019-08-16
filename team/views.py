@@ -37,7 +37,7 @@ def not_gate(binary):
     return result
 
 
-# or게이트와 not게이트를 이용해서 원하는 시간 이진 데이터를 구함.
+# or게이트와 not게이트를 이용해서 팀에 소속된 유저들의 시간표를 각각 비교해서 원하는 이진데이터를 구함
 def get_time_table(team_id):
     team = get_object_or_404(Team, pk=team_id)
     team_members = team.members.all()
