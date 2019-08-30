@@ -47,6 +47,7 @@ pip3 install -r requirements.txt
 ### 남은 것들
 
 - [ ] 전체적인 프론트엔드
+- [ ] 백엔드와 프론트엔드 병합
 
 ## 팁
 
