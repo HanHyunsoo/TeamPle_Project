@@ -53,6 +53,7 @@ pip3 install -r requirements.txt
 
 - 백엔드 view 함수들 기능 정상적으로 되는지 확인
 - 부트스트랩 테마를 쓰는 것
+- 필요한 기능들 있는지 확인하기
 
 ## 팁
 
